@@ -1,32 +1,285 @@
-# Prerequisites
-*.d
+//第二章第5题
+/*#include<iostream>  
+#include<cmath>
+using namespace std;
+int main()
+{
+    int N, i;
+    cout << "N = ";
+    cin >> N; 
+    double* A = new double[N];
+    double Ax = 0;
+    double sigma = 0;
+    cout << "Enter the elements of A[N]:" << endl;
+    for (i = 0; i < N; i++) {
+        cout << "A[" << i << "] = ";
+        cin >> A[i];
+    }
+    for (i = 0; i < N; i++) {
+        Ax += A[i] / N;
+        sigma += powf((A[i] - Ax), 2) / N;
+    }
+    cout << "The average of the array is " << Ax << "\tThe sigma of the array is " << sqrt(sigma) << endl;
+    delete[] A;
+    return 0;
+}*/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+//第二章第6题
+/*#define _USE_MATH_DEFINES
+#include <cmath>
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main()
+{
+	ofstream ou;
+	ou.open("C:\\Users\\clsf.com\\Desktop\\a.txt");
+	if (!ou)
+	{
+		cout << "can't find a true .txt" << endl;
+		return 1; // 返回非零值表示程序异常结束
+	}
 
-# Precompiled Headers
-*.gch
-*.pch
+	int a = 40, b = 50;
+	const double PI = M_PI;
+	char name[10];
+	cout << "a=";
+	cin >> a;        
+	cout << " b = ";
+	cin >> b;
+	cout << " name = ";
+	cin >> name; 
+	ou << a * PI << " " << b << " " << name << endl;
+	ou.close();
+	return 0;
+}
+*/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+//第二章第7题
+/*#define _USE_MATH_DEFINES
+#include<cmath>
+#include<iostream>
+using namespace std;
+int main()
+{
+	int m, n;
+	double x, y, z;
+	const double PI = M_PI;
+	const double threshold = 3E-12;
+	cout.precision(4);
+	cout << "Please input a correct angle,such as (10 20 20.5)" << endl;
+	cin >> m >> n >> z;
+	if (m > 360)
+	{
+		m = m - 360;
+	}
+	x = m + ((n + z / 60) / 60);
+	x = x * PI / 180;
+	if (x < -PI || x >= PI || fabs(x) < threshold) {
+		cout << "You got a wrong x value!" << endl;
+		return 1;
+	}
+	y = sqrt(fabs(powf(cos(x), 3) * powf(sin(2 * x), 5) - tan(5 / x)));
+	cout << "The result is " << y << endl;
+	return 0;
+}*/
 
-# Fortran module files
-*.mod
-*.smod
+//第二章第8题
+/*#define _USE_MATH_DEFINES
+#include<iostream >
+#include<cmath>
+using namespace std;
+const double PI = M_PI;
+double Superfical_area(float r, float h)
+{
+	return 2*PI*(r*r+r*h);
+}
+double  Volume(float r, float h)
+{
+	return PI * r * r * h;
+}
+int main()
+{
+	float r, h;
+	double P,V;
+	cout.precision(4); 
+	cout << "Please input r and h: "; 
+	cin >> r >> h; 
+	P = Superfical_area(r, h);
+	cout << "The superficial area is: " << P << endl;
+	V = Volume(r, h);
+	cout << "The volume is: " << V << endl;
+	return 0; 
+}*/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+//符号重载
+//9、编写学生结构体(内容为姓名、学号和两门课程成绩的数组)，为学生结构体重载提取符“ >> ”和插入符“ << ”，
+// 在main函数中定义一个动态的学生数组，通过for循环输入学生数组的数据并输出到文本文件“学生s.txt”中
+/*#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include<iomanip>
+using namespace std;
+struct Student {
+    string name;
+    int id;
+    int scores[2]; 
+};
+istream& operator>>(istream& in, Student& s) {// 重载提取符 ">>"
+    cout << "Enter name: ";
+    in >> s.name;
+    cout << "Enter ID: ";
+    in >> s.id;
+    cout << "Enter scores for two subjects: ";
+    in >> s.scores[0] >> s.scores[1];
+    return in;
+}
+ostream& operator<<(ostream& out, const Student& s) {// 重载插入符 "<<"
+	out << left;
+    out << "Name: " << s.name << ",ID: " << s.id
+       <<", Scores: " << s.scores[0] << ", " << s.scores[1] << endl;
+    return out;
+}
+int main() {
+    int n;
+    cout << "Enter the number of students: ";
+    cin >> n;
+    vector<Student> students(n);
+    for (int i = 0; i < n; ++i) 
+	{
+        cout << "Enter data for student " << i + 1 << ":" << endl;
+        cin >> students[i];
+    }
 
-# Executables
-*.exe
-*.out
-*.app
+    ofstream outFile("C:\\Users\\clsf.com\\Desktop\\学生s.txt");
+	if (outFile.is_open())
+	{
+		for (const auto& student : students) {
+			outFile << student;
+		}
+		outFile.close();
+		cout << "Finish!" << endl;
+	}
+	else {
+        cout << "Faliure!" << endl;
+    }
+    return 0;
+}*/
+
+//第二章第8题
+/*#define _USE_MATH_DEFINES
+#include<iostream >
+#include<cmath>
+using namespace std;
+const double PI = M_PI;
+double Superfical_area(float r, float h)
+{
+	return 2*PI*(r*r+r*h);
+}
+double  Volume(float r, float h)
+{
+	return PI * r * r * h;
+}
+int main()
+{
+	float r, h;
+	double P,V;
+	cout.precision(4);
+	cout << "Please input r and h: ";
+	cin >> r >> h;
+	P = Superfical_area(r, h);
+	cout << "The superficial area is: " << P << endl;
+	V = Volume(r, h);
+	cout << "The volume is: " << V << endl;
+	return 0;
+}*/
+
+//第二章第10题
+//练习C语言中的do..while,for
+//sum=最近输入的两个数字之和，并不是累加
+/*#define _CRT_SECURE_NO_WARNINGS//scanf报错的vs说明
+#include <stdio.h>
+int main()
+{
+	double number, sum = 0;
+	do
+	{
+		printf("输入一个数字: ");
+		scanf("%lf", &number);
+		int i;
+		for (i = 0; i < number; i++) {
+			sum = i+number;
+		}
+	} while (number != 0.0);
+	printf("总和 = %.2lf", sum);
+	return 0;
+}
+*/
+
+//第二章第11题
+//练习c语言中的switch..case语句
+//a simple cauclactor
+/*#define _CRT_SECURE_NO_WARNINGS//scanf报错的vs说明
+#include <stdio.h>
+#include<math.h>
+int main() {
+	char opreator;
+	double n1, n2;
+	printf("please input a right opreator +,-,*,/\n");
+	scanf("%c", &opreator);
+	printf("please input a right number form, like n1 n2\n");
+	scanf("%lf %lf", &n1, &n2);
+	switch (opreator)
+	{
+	case'+':
+		printf("%.1lf+%.1lf=%.1lf", n1, n2, n1 + n2);//n1,n2,不能省略
+		break;
+	case'-':
+		printf("%.1lf-%.1lf=%.1lf", n1, n2, n1 - n2);
+		break;
+	case'*':
+		printf("%.1lf*%.1lf=%.1lf", n1, n2, n1 * n2);
+		break;
+	case'/':
+		printf("%.1lf/%.1lf=%.1lf", n1, n2, n1 / n2);
+		break;
+	default:
+		printf("YOU WRONG!");
+	}
+	return 0;
+}*/
+
+//第二张第12题
+
+
+//第二章第14题
+/*#define _USE_MATH_DEFINES
+#include<iostream >
+#include<cmath>
+using namespace std;
+const double PI = M_PI;
+
+int main()
+{	int n=0;
+	double *banjin;
+	double *gao;
+	banjin = new double [n];
+	gao = new double[n];
+	double P,V;
+	cout.precision(4);
+	cout << "Please input n: ";
+	cin >> n;
+	for (int i = 0; i < n; ++i)
+	{
+		cout.precision(5);
+		cout << "please input banjin:";
+		cin >> banjin[i];
+		cout << "please input gao";
+		cin >> gao[i];
+		P = 2 * PI * (powf(banjin[i], 2) + (gao[i] * banjin[i]));
+		V = PI * (powf(banjin[i], 2) * gao[i]);
+		cout << "The P is " << P << " ,The V is " << V;
+	}
+	return 0;
+}*/
